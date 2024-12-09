@@ -5,77 +5,46 @@ from PyPDF2 import PdfReader, PdfWriter
 import io
 
 # --------------------------------------------------------------------------------
-#sidebar portion
+#sidebar
 st.sidebar.title("IF THERE ARE ANY BUGS PLEASE CONTACT")
-st.sidebar.markdown("@LUKE.FULLARD@HORIZONS.GOVT.NZ")
-st.sidebar.image("HorizonsLogo.png")
+st.sidebar.markdown("@ChanceDehar@hotmail.com")
+st.image("airport.png")
 # --------------------------------------------------------------------------------
-# Definitions
-
-# Function to process the page range input
-def page_selection(selection, total_pages):
-    pages = []
-    for part in selection.split(","):
-        if "-" in part:
-            start, end = map(int, part.split("-"))
-            if start > total_pages or end > total_pages:
-                raise ValueError("Page range exceeds the total number of pages.")
-            pages.extend(range(start - 1, end))
-        else:
-            page = int(part) - 1
-            if page >= total_pages:
-                raise ValueError("Page number exceeds the total number of pages.")
-            pages.append(page)
-    return sorted(set(p for p in pages if 0 <= p < total_pages))
-
-
-# Function to combine selected pages from multiple PDFs into one
-def combine_pdfs(pdf_files, page_ranges):
-    writer = PdfWriter()
-    for pdf, ranges in zip(pdf_files, page_ranges):
-        reader = PdfReader(pdf)
-        for page in ranges:
-            writer.add_page(reader.pages[page])
-    output = io.BytesIO()
-    writer.write(output)
-    output.seek(0)
-    return output
-
-
-# --------------------------------------------------------------------------------
-st.title("PDF Combine Tool")
+st.title("PDF Compression Tool")
 st.divider()
-st.write("This tool is used to combine different PDF files")
-st.write("It can do multiple files and specific pages")
+st.write("Compress your PDF files to reduce their size")
 st.divider()
-pdf_files = st.file_uploader("Upload PDF files", type="pdf", accept_multiple_files=True)
+uploaded_file = st.file_uploader("Upload a PDF file", type="pdf")
 st.divider()
 
-if pdf_files:
-    set_all_ranges = st.text_input("Set all page ranges (e.g., 1-3,5):", "")
-    page_ranges = []
-    valid_input = True
-    error_message = ""
+if uploaded_file:
+    compress_button = st.button("Compress PDF")
 
-    for pdf in pdf_files:
-        total_pages = len(PdfReader(pdf).pages)
-        default_range = set_all_ranges if set_all_ranges else f"1-{total_pages}"
-        ranges = st.text_input(f"Pages for {pdf.name} (e.g., 1-3,5):", default_range)
-
+    if compress_button:
         try:
-            selected_pages = page_selection(ranges, total_pages)
-            page_ranges.append(selected_pages)
-        except ValueError as e:
-            valid_input = False
-            error_message = f"Error for {pdf.name}: {e}"
-            st.error(error_message)
-            break
-    # --------------------------------------------------------------------------------
-    # combine and download button
-    st.divider()
-    if valid_input and st.button("Combine PDFs"):
-        combined_pdf = combine_pdfs(pdf_files, page_ranges)
-        st.success("PDF combine completed successfully!")
-        st.divider()
-        st.download_button("Download Combined PDF", data=combined_pdf, file_name="combined.pdf", mime="application/pdf")
+            pdf_reader = PdfReader(uploaded_file)
+            pdf_writer = PdfWriter()
+
+            for page in pdf_reader.pages:
+                pdf_writer.add_page(page)
+
+            pdf_writer._info.get_object().update({})
+
+            compressed_pdf_io = io.BytesIO()
+            pdf_writer.write(compressed_pdf_io)
+            compressed_pdf_io.seek(0)
+
+            st.success("PDF compression completed successfully!")
+            st.divider()
+            st.download_button(
+                label="Download Compressed PDF",
+                data=compressed_pdf_io,
+                file_name="compressed_file.pdf",
+                mime="application/pdf",
+            )
+
+
+
+        except Exception as e:
+            st.error(f"An error occurred while compressing the PDF: {e}")
 # --------------------------------------------------------------------------------

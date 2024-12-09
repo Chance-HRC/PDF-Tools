@@ -7,7 +7,6 @@ import io
 # --------------------------------------------------------------------------------
 #sidebar
 st.sidebar.title("IF THERE ARE ANY BUGS PLEASE CONTACT")
-st.sidebar.markdown("@LUKE.FULLARD@HORIZONS.GOVT.NZ")
-st.sidebar.image("HorizonsLogo.png")
-st.sidebar.title("STILL IN PROGRESS")
+st.sidebar.markdown("@ChanceDehar@hotmail.com")
+st.image("airport.png")
 # --------------------------------------------------------------------------------
