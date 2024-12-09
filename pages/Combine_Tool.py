@@ -8,7 +8,7 @@ import io
 #sidebar
 st.sidebar.title("IF THERE ARE ANY BUGS PLEASE CONTACT")
 st.sidebar.markdown("@ChanceDehar@hotmail.com")
-st.image("airport.png")
+st.sidebar.image("airport.png")
 # --------------------------------------------------------------------------------
 # Definitions
 
