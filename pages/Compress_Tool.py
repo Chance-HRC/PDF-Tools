@@ -3,6 +3,12 @@
 import streamlit as st
 from PyPDF2 import PdfReader, PdfWriter
 import io
+
+# --------------------------------------------------------------------------------
+#sidebar portion
+st.sidebar.title("IF THERE ARE ANY BUGS PLEASE CONTACT")
+st.sidebar.markdown("@LUKE.FULLARD@HORIZONS.GOVT.NZ")
+st.sidebar.image("HorizonsLogo.png")
 # --------------------------------------------------------------------------------
 # Definitions
 
@@ -37,8 +43,13 @@ def combine_pdfs(pdf_files, page_ranges):
 
 
 # --------------------------------------------------------------------------------
-st.title("PDF Combiner Tool")
+st.title("PDF Combine Tool")
+st.divider()
+st.write("This tool is used to combine different PDF files")
+st.write("It can do multiple files and specific pages")
+st.divider()
 pdf_files = st.file_uploader("Upload PDF files", type="pdf", accept_multiple_files=True)
+st.divider()
 
 if pdf_files:
     set_all_ranges = st.text_input("Set all page ranges (e.g., 1-3,5):", "")
@@ -59,7 +70,12 @@ if pdf_files:
             error_message = f"Error for {pdf.name}: {e}"
             st.error(error_message)
             break
-
+    # --------------------------------------------------------------------------------
+    # combine and download button
+    st.divider()
     if valid_input and st.button("Combine PDFs"):
         combined_pdf = combine_pdfs(pdf_files, page_ranges)
+        st.success("PDF combine completed successfully!")
+        st.divider()
         st.download_button("Download Combined PDF", data=combined_pdf, file_name="combined.pdf", mime="application/pdf")
+# --------------------------------------------------------------------------------
