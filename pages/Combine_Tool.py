@@ -46,7 +46,6 @@ def combine_pdfs(pdf_files, page_ranges):
 st.title("PDF Combine Tool")
 st.divider()
 st.write("This tool is used to combine different PDF files")
-st.write("It can do multiple files and specific pages")
 st.divider()
 pdf_files = st.file_uploader("Upload PDF files", type="pdf", accept_multiple_files=True)
 st.divider()
