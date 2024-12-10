@@ -29,7 +29,7 @@ st.title("PDF Encryption Tool")
 st.divider()
 st.write("This tool allows you to encrypt a PDF file with a password.")
 st.divider()
-pdf_file = st.file_uploader("Upload a PDF file to encrypt", type="pdf")
+pdf_file = st.file_uploader("Upload a PDF file", type="pdf")
 st.divider()
 
 if pdf_file:
