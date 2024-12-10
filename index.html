@@ -93,7 +93,6 @@ def combine_pdfs(pdf_files, page_ranges):
 st.title("PDF Combine Tool")
 st.divider()
 st.write("This tool is used to combine different PDF files")
-st.write("It can do multiple files and specific pages")
 st.divider()
 pdf_files = st.file_uploader("Upload PDF files", type="pdf", accept_multiple_files=True)
 st.divider()
@@ -207,7 +206,7 @@ st.title("PDF Encryption Tool")
 st.divider()
 st.write("This tool allows you to encrypt a PDF file with a password.")
 st.divider()
-pdf_file = st.file_uploader("Upload a PDF file to encrypt", type="pdf")
+pdf_file = st.file_uploader("Upload a PDF file", type="pdf")
 st.divider()
 
 if pdf_file:
