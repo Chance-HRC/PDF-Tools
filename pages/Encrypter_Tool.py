@@ -8,7 +8,6 @@ import io
 #sidebar
 st.sidebar.title("IF THERE ARE ANY BUGS PLEASE CONTACT")
 st.sidebar.markdown("@ChanceDehar@hotmail.com")
-st.sidebar.image("airport.png")
 # --------------------------------------------------------------------------------
 # Function to encrypt PDF
 def encrypt_pdf(pdf_file, password):
