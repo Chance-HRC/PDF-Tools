@@ -8,11 +8,10 @@ import io
 #sidebar
 st.sidebar.title("IF THERE ARE ANY BUGS PLEASE CONTACT")
 st.sidebar.markdown("@ChanceDehar@hotmail.com")
-st.sidebar.image("airport.png")
 # --------------------------------------------------------------------------------
 st.title("PDF Compression Tool")
 st.divider()
-st.write("Compress your PDF files to reduce their size")
+st.write("This tool it used to compress your PDF files")
 st.divider()
 uploaded_file = st.file_uploader("Upload a PDF file", type="pdf")
 st.divider()
